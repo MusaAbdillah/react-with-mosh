@@ -7,8 +7,17 @@ interface Props {
 function Alert({ children }: Props) {
   return (
     <div>
-      <div className="alert alert-primary" role="alert">
+      <div
+        className="alert alert-primary alert-dismissible fade show"
+        role="alert"
+      >
         {children}
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
       </div>
     </div>
   );
@@ -17,5 +26,5 @@ function Alert({ children }: Props) {
 export default Alert;
 
 // installing es7+ plugin
-// type refce
+// type rafce
 // enter
