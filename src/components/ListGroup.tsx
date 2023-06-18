@@ -2,12 +2,19 @@
 import { MouseEvent } from "react";
 import { useState } from "react";
 
-function ListGroup() {
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+// props: Props ---------------------------------------------------------------- first solution
+// {items, heading}}: Props ---------------------------------------------------------------- second solution
+function ListGroup({ items, heading, onSelectItem }: Props) {
   //   immutabe
   //   const items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
 
   //   muteable
-  let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
+  //   let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
   //   items = [];
 
   //   hook, default arguments is -1, no one selected
@@ -22,7 +29,7 @@ function ListGroup() {
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {/*  first technique*/}
       {/* {items.length === 0 ? <p> No items found</p> : null} */}
 
@@ -45,7 +52,11 @@ function ListGroup() {
             // onClick={() => (itemActiveIndex = index)}
 
             // modifiy variable value with state
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => {
+              // call two function on click event, wrap with curl braches, sperate with semicolon ;
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
           >
             {item}
           </li>
