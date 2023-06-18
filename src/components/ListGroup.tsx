@@ -2,6 +2,8 @@
 import { MouseEvent } from "react";
 import { useState } from "react";
 
+// props immutable
+// state mutable
 interface Props {
   items: string[];
   heading: string;
