@@ -2,13 +2,14 @@ import React, { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  onClick: (alertEnabled: boolean) => void;
 }
 
-function Alert({ children }: Props) {
+function Alert({ children, onClick }: Props) {
   return (
     <div>
       <div
-        className="alert alert-primary alert-dismissible fade show"
+        className="alert alert-warning alert-dismissible fade show"
         role="alert"
       >
         {children}
@@ -17,6 +18,7 @@ function Alert({ children }: Props) {
           className="btn-close"
           data-bs-dismiss="alert"
           aria-label="Close"
+          onClick={() => onClick(false)}
         ></button>
       </div>
     </div>

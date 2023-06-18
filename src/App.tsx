@@ -13,14 +13,16 @@ function App() {
   const [alertEnabled, setAlertEnabled] = useState(false);
 
   const handleButtonClick = (alertEnabled: boolean) => {
-    console.log("------ alertEnabled ------");
-    console.log(alertEnabled);
-    alertEnabled ? setAlertEnabled(false) : setAlertEnabled(true);
+    setAlertEnabled(alertEnabled);
   };
 
   return (
     <div>
-      {alertEnabled && <Alert>Hello world</Alert>}
+      {alertEnabled && (
+        <Alert onClick={handleButtonClick}>
+          <h2>Hello world</h2>
+        </Alert>
+      )}
 
       <ListGroup
         items={items}
