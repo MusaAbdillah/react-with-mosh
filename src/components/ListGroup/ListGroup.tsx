@@ -1,7 +1,7 @@
 // import {} from "react";
 import { MouseEvent } from "react";
 import { useState } from "react";
-import "./ListGroup.css";
+import styles from "./ListGroup.module.css";
 
 // props immutable
 // state mutable
@@ -42,7 +42,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
       {/* third technique */}
       {/* {getMessage()} */}
 
-      <ul className="list-group">
+      <ul className={[styles.listGroup, styles.container].join(" ")}>
         {items.map((item, index) => (
           <li
             key={item}
