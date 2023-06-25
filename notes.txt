@@ -1,0 +1,2 @@
+have trouble with styled-components installation go
+    npm install styled-components@latest
