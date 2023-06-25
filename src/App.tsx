@@ -7,15 +7,26 @@ import Like from "./components/Like/Like";
 function App() {
   let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
 
+  var buttonTypes = ["primary", "secondary", "danger", "warning", "info"];
+  var randomButton = Math.floor(Math.random() * buttonTypes.length);
+
   const handleSelectItem = (item: string) => {
     console.log(item);
   };
 
   const [alertEnabled, setAlertEnabled] = useState(false);
-  const [likeEnabled, setLikeEnabled] = useState(true);
+  const [likeEnabled, setLikeEnabled] = useState(false);
+  const [button, setButton] = useState({
+    type: "primary",
+    text: "Click me",
+  });
 
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
+    setButton({
+      ...button,
+      type: buttonTypes[randomButton],
+    });
   };
 
   const handleLikeClick = (likeEnable: boolean) => {
@@ -37,7 +48,7 @@ function App() {
       />
       <Button
         children="Alert Me!"
-        color="primary"
+        color={button.type}
         onClick={handleButtonClick}
         alert={alertEnabled}
       />

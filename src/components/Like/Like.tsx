@@ -1,4 +1,4 @@
-import { FcLike } from "react-icons/fc";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import styles from "./Like.module.css";
 
 interface LikeProps {
@@ -7,10 +7,26 @@ interface LikeProps {
 }
 
 function Like({ like, setLikeEnabled }: LikeProps) {
+  if (like)
+    return (
+      <AiFillHeart
+        color="#eb3477"
+        size={40}
+        onClick={() => {
+          setLikeEnabled(false);
+          console.log(like);
+        }}
+      />
+    );
+
   return (
-    <div onClick={() => setLikeEnabled(false)}>
-      <FcLike color={like ? "red" : styles.unlike} size="40" />
-    </div>
+    <AiOutlineHeart
+      size={40}
+      onClick={() => {
+        setLikeEnabled(true);
+        console.log(like);
+      }}
+    />
   );
 }
 
