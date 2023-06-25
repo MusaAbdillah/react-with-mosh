@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { FiAlertOctagon } from "react-icons/fi";
 
 interface Props {
   children: ReactNode;
@@ -12,6 +13,7 @@ function Alert({ children, onClick }: Props) {
         className="alert alert-warning alert-dismissible fade show"
         role="alert"
       >
+        <FiAlertOctagon color="black" size="40" />
         {children}
         <button
           type="button"
