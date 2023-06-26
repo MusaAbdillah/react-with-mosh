@@ -5,7 +5,15 @@ import { useState } from "react";
 import Like from "./components/Like/Like";
 
 function App() {
-  let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
+  // let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
+
+  const [items, setItems] = useState([
+    "New York",
+    "San Francisco",
+    "Tokyo",
+    "London",
+    "Berlin",
+  ]);
 
   var buttonTypes = ["primary", "secondary", "danger", "warning", "info"];
   var randomButton = Math.floor(Math.random() * buttonTypes.length);
@@ -37,6 +45,17 @@ function App() {
       ...button,
       detail: { ...button.detail, text: "Click mee!" },
     });
+
+    // update array - add
+    // setItems([...items, "Jakarta"]);
+
+    // update array - remove
+    // setItems(items.filter((item) => item != "San Francisco"));
+
+    // update array - update
+    setItems(
+      items.map((item) => (item === "San Francisco" ? "Jakarta" : item))
+    );
   };
 
   const handleLikeClick = (likeEnable: boolean) => {
