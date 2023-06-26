@@ -18,14 +18,24 @@ function App() {
   const [likeEnabled, setLikeEnabled] = useState(false);
   const [button, setButton] = useState({
     type: "primary",
-    text: "Click me",
+    detail: {
+      text: "Click me!",
+    },
   });
 
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
+
+    // update object
+    // setButton({
+    //   ...button,
+    //   type: buttonTypes[randomButton],
+    // });
+
+    // update nested object
     setButton({
       ...button,
-      type: buttonTypes[randomButton],
+      detail: { ...button.detail, text: "Click mee!" },
     });
   };
 
@@ -48,9 +58,9 @@ function App() {
       />
       <Button
         children="Alert Me!"
-        color={button.type}
         onClick={handleButtonClick}
         alert={alertEnabled}
+        text={button.detail.text}
       />
       <Like like={likeEnabled} setLikeEnabled={handleLikeClick} />
     </div>

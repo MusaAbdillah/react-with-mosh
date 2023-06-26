@@ -6,10 +6,17 @@ interface Props {
   onClick: (alertEnabled: boolean) => void;
   //   current state
   alert: boolean;
+  text: string;
 }
 
 // props with default values
-const Button = ({ children, color = "primary", onClick, alert }: Props) => {
+const Button = ({
+  children,
+  color = "primary",
+  onClick,
+  alert,
+  text,
+}: Props) => {
   //   for flip button
   const getAlert = () => {
     return alert ? true : false;
@@ -21,7 +28,7 @@ const Button = ({ children, color = "primary", onClick, alert }: Props) => {
       className={[styles.btn, styles["btn-" + color]].join(" ")}
       onClick={() => onClick(true)}
     >
-      {children}
+      {text}
     </button>
   );
 };
