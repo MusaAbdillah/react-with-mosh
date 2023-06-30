@@ -11,7 +11,7 @@ function OnOff({ done, setDone, id }: OnOffProps) {
     <>
       <MdDoneOutline
         size="30"
-        color={done ? "green" : "yello"}
+        color={done ? "green" : "yellow"}
         onClick={() => setDone(done, id)}
       />
     </>

@@ -4,6 +4,7 @@ import Alert from "./components/Alert";
 import Button from "./components/Button/Button";
 import { useState } from "react";
 import Like from "./components/Like/Like";
+import { produce } from "immer";
 
 function App() {
   // let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
@@ -68,10 +69,21 @@ function App() {
     setLikeEnabled(likeEnable);
   };
 
-  // update array of object
+  // update array of object - traditional
   const handleArrayOfObject = (fixed: boolean, id: number) => {
     setBugs(
       bugs.map((bug) => (bug.id === id ? { ...bug, fixed: fixed } : bug))
+    );
+  };
+
+  // handle array of object update - immer
+  const handleArrayOfObjectWithImmer = (fixed: boolean, id: number) => {
+    setBugs(
+      produce((draft) => {
+        // find bug
+        const bug = draft.find((bug) => bug.id === id);
+        if (bug) bug.fixed = fixed;
+      })
     );
   };
 
@@ -89,7 +101,7 @@ function App() {
         onSelectItem={handleSelectItem}
       />
 
-      <ArrayGroup records={bugs} setDone={handleArrayOfObject} />
+      <ArrayGroup records={bugs} setDone={handleArrayOfObjectWithImmer} />
 
       <Button
         children="Alert Me!"
