@@ -5,6 +5,8 @@ import Button from "./components/Button/Button";
 import { useState } from "react";
 import Like from "./components/Like/Like";
 import { produce } from "immer";
+import Navbar from "./components/Navbar/Navbar";
+import Cart from "./components/Cart";
 
 function App() {
   // let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
@@ -38,6 +40,7 @@ function App() {
     { id: 2, title: "back end bug", fixed: false },
   ]);
 
+  const [products, setProducts] = useState(["Product1", "Product2"]);
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
 
@@ -110,6 +113,10 @@ function App() {
         text={button.detail.text}
       />
       <Like like={likeEnabled} setLikeEnabled={handleLikeClick} />
+      <hr />
+
+      <Navbar cartItemCount={products.length} />
+      <Cart cartItems={products} onClear={() => setProducts([])} />
     </div>
   );
 }
