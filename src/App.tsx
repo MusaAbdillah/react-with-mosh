@@ -1,4 +1,5 @@
 import ListGroup from "./components/ListGroup";
+import ArrayGroup from "./components/ArrayGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button/Button";
 import { useState } from "react";
@@ -31,6 +32,11 @@ function App() {
     },
   });
 
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "front end bug", fixed: false },
+    { id: 2, title: "back end bug", fixed: false },
+  ]);
+
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
 
@@ -62,6 +68,13 @@ function App() {
     setLikeEnabled(likeEnable);
   };
 
+  // update array of object
+  const handleArrayOfObject = (fixed: boolean, id: number) => {
+    setBugs(
+      bugs.map((bug) => (bug.id === id ? { ...bug, fixed: fixed } : bug))
+    );
+  };
+
   return (
     <div>
       {alertEnabled && (
@@ -75,6 +88,9 @@ function App() {
         heading="Cities"
         onSelectItem={handleSelectItem}
       />
+
+      <ArrayGroup records={bugs} setDone={handleArrayOfObject} />
+
       <Button
         children="Alert Me!"
         onClick={handleButtonClick}
