@@ -4,7 +4,7 @@ import OnOff from "../OnOff/OnOff";
 interface RecordsProps {
   id: number;
   title: string;
-  fixed: boolean;
+  status: boolean;
 }
 
 interface ArrayGroupProps {
@@ -19,7 +19,7 @@ function ArrayGroup({ records, setDone }: ArrayGroupProps) {
         return (
           <div key={record.id}>
             <p>title: {record.title}</p>
-            <p>fixed: {record.fixed ? "True" : "False"}</p>
+            <p>status: {record.status ? "True" : "False"}</p>
             <OnOff done={true} setDone={setDone} id={record.id} />
             <hr />
           </div>

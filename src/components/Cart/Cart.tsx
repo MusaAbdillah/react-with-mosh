@@ -1,9 +1,16 @@
-interface CartProps {
-  cartItems: string[];
-  onClear: () => void;
+interface CartItemsProps {
+  id: number;
+  title: string;
+  quantity: number;
 }
 
-function Cart({ cartItems, onClear }: CartProps) {
+interface CartProps {
+  cartItems: CartItemsProps[];
+  onClear: () => void;
+  onUpdate: (id: number) => void;
+}
+
+function Cart({ cartItems, onClear, onUpdate }: CartProps) {
   console.log(cartItems);
   return (
     <>
@@ -11,7 +18,14 @@ function Cart({ cartItems, onClear }: CartProps) {
       {console.log("-------------cartItems-----------")}
       {console.log(cartItems)}
       {cartItems.map((cartItem) => (
-        <p>{cartItem}</p>
+        <div key={cartItem.id}>
+          <p>Title: {cartItem.title}</p>
+          <p>Quantity: {cartItem.quantity}</p>
+          <button onClick={() => onUpdate(cartItem.id)}>
+            {" "}
+            Add {cartItem.title}
+          </button>
+        </div>
       ))}
       <button onClick={onClear}>Clear</button>
     </>

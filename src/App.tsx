@@ -36,8 +36,8 @@ function App() {
   });
 
   const [bugs, setBugs] = useState([
-    { id: 1, title: "front end bug", fixed: false },
-    { id: 2, title: "back end bug", fixed: false },
+    { id: 1, title: "front end bug", status: false },
+    { id: 2, title: "back end bug", status: false },
   ]);
 
   const [games, setGames] = useState({
@@ -46,7 +46,18 @@ function App() {
     names: ["Pubg", "Free Fire", "Point Blank"],
   });
 
-  const [products, setProducts] = useState(["Product1", "Product2"]);
+  const [cart, setCart] = useState({
+    id: 1,
+    cartItems: [
+      { id: 1, title: "Product", status: false, quantity: 1 },
+      { id: 2, title: "Product", status: true, quantity: 2 },
+    ],
+  });
+
+  const [products, setProducts] = useState([
+    { id: 1, title: "Product 1", status: false, quantity: 1 },
+    { id: 2, title: "Product 2", status: true, quantity: 2 },
+  ]);
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
 
@@ -91,7 +102,7 @@ function App() {
       produce((draft) => {
         // find bug
         const bug = draft.find((bug) => bug.id === id);
-        if (bug) bug.fixed = fixed;
+        if (bug) bug.status = fixed;
       })
     );
   };
@@ -99,6 +110,23 @@ function App() {
   // update array inside object
   const handleGame = () => {
     setGames({ ...games, names: [...games.names, "Valoran"] });
+  };
+
+  // update object inside array object
+  const handleCart = (id: number) => {
+    setCart({
+      ...cart,
+      cartItems: cart.cartItems.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
+  };
+
+  const onClearCart = (id: number) => {
+    setCart({
+      ...cart,
+      cartItems: [],
+    });
   };
 
   return (
@@ -127,7 +155,11 @@ function App() {
       <hr />
 
       <Navbar cartItemCount={products.length} />
-      <Cart cartItems={products} onClear={() => setProducts([])} />
+      <Cart
+        cartItems={products}
+        onClear={() => setProducts([])}
+        onUpdate={handleCart}
+      />
 
       <hr />
       {/* exercise */}
@@ -142,6 +174,13 @@ function App() {
         onClick={handleGame}
         alert={alertEnabled}
         text="Update Games"
+      />
+
+      {/* exercise 3 */}
+      <Cart
+        cartItems={cart.cartItems}
+        onClear={() => onClearCart}
+        onUpdate={handleCart}
       />
     </div>
   );
