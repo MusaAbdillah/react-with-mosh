@@ -40,6 +40,12 @@ function App() {
     { id: 2, title: "back end bug", fixed: false },
   ]);
 
+  const [games, setGames] = useState({
+    id: 1,
+    genre: "FPS",
+    names: ["Pubg", "Free Fire", "Point Blank"],
+  });
+
   const [products, setProducts] = useState(["Product1", "Product2"]);
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
@@ -90,6 +96,11 @@ function App() {
     );
   };
 
+  // update array inside object
+  const handleGame = () => {
+    setGames({ ...games, names: [...games.names, "Valoran"] });
+  };
+
   return (
     <div>
       {alertEnabled && (
@@ -117,6 +128,21 @@ function App() {
 
       <Navbar cartItemCount={products.length} />
       <Cart cartItems={products} onClear={() => setProducts([])} />
+
+      <hr />
+      {/* exercise */}
+
+      <ListGroup
+        items={games.names}
+        heading="Games"
+        onSelectItem={handleSelectItem}
+      />
+      <Button
+        children="Update Games!"
+        onClick={handleGame}
+        alert={alertEnabled}
+        text="Update Games"
+      />
     </div>
   );
 }
