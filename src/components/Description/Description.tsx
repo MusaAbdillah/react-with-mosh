@@ -18,11 +18,9 @@ function Description({
       <div>
         {loremIpsum.substring(0, isFullText ? loremIpsum.length : length) +
           "..."}
-        {isFullText ? (
-          <button onClick={() => setIsFullText(false)}> Less </button>
-        ) : (
-          <button onClick={() => setIsFullText(true)}> More </button>
-        )}
+        <button onClick={() => setIsFullText(!isFullText)}>
+          {isFullText ? "Less" : "More"}
+        </button>
       </div>
     </>
   );
