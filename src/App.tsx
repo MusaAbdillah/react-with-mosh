@@ -7,6 +7,7 @@ import Like from "./components/Like/Like";
 import { produce } from "immer";
 import Navbar from "./components/Navbar/Navbar";
 import Cart from "./components/Cart";
+import Description from "./components/Description/Description";
 
 function App() {
   // let items = ["New York", "San Francisco", "Tokyo", "London", "Berlin"];
@@ -58,6 +59,9 @@ function App() {
     { id: 1, title: "Product 1", status: false, quantity: 1 },
     { id: 2, title: "Product 2", status: true, quantity: 2 },
   ]);
+
+  const [isFullText, setIsFullText] = useState(false);
+
   const handleButtonClick = (alertEnabled: boolean) => {
     setAlertEnabled(alertEnabled);
 
@@ -129,8 +133,12 @@ function App() {
     });
   };
 
+  const handleIsFullText = (isFullText: boolean) => {
+    setIsFullText(isFullText);
+  };
+
   return (
-    <div>
+    <div className="container">
       {alertEnabled && (
         <Alert onClick={handleButtonClick}>
           <h2>Hello world</h2>
@@ -181,6 +189,12 @@ function App() {
         cartItems={cart.cartItems}
         onClear={() => onClearCart}
         onUpdate={handleCart}
+      />
+      <hr />
+      <Description
+        length={20}
+        isFullText={isFullText}
+        setIsFullText={handleIsFullText}
       />
     </div>
   );
